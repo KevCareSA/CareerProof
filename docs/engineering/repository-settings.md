@@ -1,8 +1,8 @@
 # CareerProof — Repository Settings
 
-**Status:** Required before Step 2 is frozen on GitHub.
+**Status:** Verified for the solo-repository phase on 2026-08-27.
 
-These controls live in GitHub repository settings and therefore cannot be guaranteed by files alone. The human project owner must enable and verify them after the repository is created remotely.
+These controls live in GitHub repository settings and therefore cannot be guaranteed by files alone. The human project owner must enable them, and the repository state must be verified before Step 2 is frozen.
 
 ## Protected branch
 
@@ -18,7 +18,8 @@ Required settings for the current solo-repository phase:
   - `Build`
   - `Unit Tests`
   - `Format`
-- Block direct pushes to `main`.
+- Block direct pushes to `main` through the pull-request requirement with no bypass actors.
+- Block branch deletion and force pushes.
 - Do not grant implementation/reviewer agents bypass permission for branch protection.
 - Human project owner retains final merge authority.
 
@@ -31,8 +32,10 @@ Therefore required-review enforcement is intentionally deferred until a second r
 Until then:
 
 - human review remains a process requirement under the reviewer contract;
-- GitHub enforces PR-only changes, green status checks, up-to-date branches, and no direct pushes to `main`;
+- GitHub enforces PR-only changes, green status checks, up-to-date branches, and no bypass actors;
 - CODEOWNERS remains an auditable ownership artifact but is not a required-review gate.
+
+This is a deliberate configuration, not a missing protection. A future reviewer must not increase the required approval count or enable required CODEOWNER review until a second reviewer identity exists.
 
 ## CODEOWNERS
 
@@ -42,15 +45,18 @@ Required CODEOWNER review must not be enabled during the solo-repository phase. 
 
 ## Verification record
 
-After configuring GitHub, record the date and verifier here:
-
-- Configured: `PENDING`
-- Verified by: `PENDING`
-- Require pull request before merging: `PENDING`
-- Required approving reviews: `0`
-- Require branches up to date: `PENDING`
-- Direct pushes to `main` blocked: `PENDING`
-- Required checks observed on first PR: `Build`, `Unit Tests`, `Format` — `PASS`
+- Configured: `2026-08-27`
+- Verified by: `ChatGPT (GPT-5.6 Sol)`
+- Ruleset: `Protect main` — `ACTIVE`
+- Target: default branch (`main`) — `VERIFIED`
+- Require pull request before merging: `VERIFIED`
+- Required approving reviews: `0` — `VERIFIED`
+- Require branches up to date: `VERIFIED`
+- Bypass actors: `NONE` — `VERIFIED`
+- Branch deletion blocked: `VERIFIED`
+- Force pushes blocked: `VERIFIED`
+- Required checks observed on PR #1: `Build`, `Unit Tests`, `Format` — `PASS`
+- CODEOWNERS file: `* @KevCareSA` — `VERIFIED`
 - CODEOWNERS review enforcement: `DEFERRED — second reviewer identity required`
 
-Step 2 is not fully frozen until the remaining `PENDING` repository controls are completed and verified.
+Step 2 may be frozen after PR #1 is merged into `main`.
