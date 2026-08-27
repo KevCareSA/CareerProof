@@ -1,0 +1,106 @@
+{
+  "taxonomy_version": "v1",
+  "created": "2026-08-27",
+  "note": "Deterministic resolution runs before any LLM fallback. Every alias below was observed in Daily Code Log Days 71-100. Matching is case-insensitive after normalisation (em-dash and en-dash to hyphen, collapse whitespace).",
+
+  "skill_aliases": {
+    "csharp": ["c#", "c# level 9", "c# .net", "csharp", "c sharp"],
+    "aspnet-core": ["asp.net core", "aspnet core", "asp net core", "asp.net", "aspnet", ".net"],
+    "sql": ["sql", "database design", "database design and implementation"],
+    "dsa": ["data structures", "programming: data structures"],
+    "azure": ["azure", "az-900"],
+    "project-management": ["software project management", "project management"]
+  },
+
+  "topic_aliases": {
+    "csharp.generics": ["generics", "generics in asp.net core"],
+    "csharp.generics.interfaces": ["ienumerable<t>", "icollection<t>", "ilist<t>", "irepository<t>", "generics - interfaces", "generics — interfaces"],
+    "csharp.generics.constraints": ["generic constraints", "constraints: class", "constraints: struct", "constraints: new()", "interface constraints", "new() constructor constraint"],
+    "csharp.generics.collections": ["collections", "collections<t>"],
+    "csharp.generics.repositories-services": ["generic repositories", "generic repositories / services", "generic repositories/services"],
+    "aspnet-core.controllers": ["controller", "controllers"],
+    "aspnet-core.controllers.action-results": ["iactionresult", "iactionresults", "http response issues", "http responses"],
+    "aspnet-core.controllers.service-invocation": ["controllers to service", "controller to service", "moved into service code"],
+    "aspnet-core.services.scaffolding": ["service scaffold", "service layer", "scaffold setup"],
+    "sql.queries.union": ["union"],
+    "sql.queries.insert": ["insert"],
+    "sql.queries.aggregates": ["aggregates"],
+    "sql.queries.subqueries": ["subquery", "subqueries"],
+    "sql.views": ["view", "customer_addresses view"],
+    "sql.schemas": ["schema build", "my_web_db schema"],
+    "sql.stored-procedures.control-flow": ["stored procedure if logic"],
+    "sql.stored-procedures.parameterised": ["parameterised procedure", "parameter procedure", "insert_category parameterised procedure"],
+    "dsa.recursion": ["recursion"],
+    "dsa.trees.binary": ["binary trees", "chapter 19: binary trees"],
+    "dsa.graphs": ["graphs", "chapter 20: graphs"],
+    "dsa.graphs.bfs": ["bfs"],
+    "dsa.graphs.dijkstra": ["dijkstra"],
+    "azure.compute": ["azure compute", "azure compute services"],
+    "azure.networking": ["azure networking", "networking services"],
+    "azure.availability.availability-sets": ["availability sets", "fault domains", "update domains"],
+    "project-management.integration": ["project integration", "project selection"],
+    "project-management.schedule": ["project schedule management"],
+    "project-management.cost": ["project cost management"],
+    "project-management.strategy.swot": ["swot", "swot analysis"]
+  },
+
+  "project_aliases": {
+    "devuniverse": [
+      "devuniverse",
+      "universaldev",
+      "universaldev platform",
+      "100 days v2 / universaldev",
+      "100 days v2 - universaldev",
+      "100 days v2 — universaldev"
+    ]
+  },
+
+  "low_confidence_project_aliases": {
+    "devuniverse": [
+      "100 days v2"
+    ],
+    "note": "'100 Days V2' alone is the challenge name, not the project name. Day 81 Session 2 reads '100 Days V2 — Controller built and understood' with no project named. Resolve to devuniverse at reduced confidence, never above the auto-accept threshold."
+  },
+
+  "course_code_pattern": "\\b(INF|COS)\\d{4}\\b",
+
+  "activity_type_markers": {
+    "submission": ["submitted", "submission", "peer review complete", "closed within window"],
+    "planning": ["q2 review", "q3 plan", "quarter", "methodology reset", "roadmap", "scope check", "weekly review"],
+    "rest": ["rest", "no sessions", "family travel"],
+    "review": ["revision", "sweep", "final review", "gap closing", "closing gaps", "touch-ups"],
+    "implementation": ["build", "built", "coded", "scaffold", "construction", "implemented"],
+    "learning": ["lesson", "learning", "started", "continued", "complete", "prep"]
+  },
+
+  "position_priors": {
+    "note": "Session position is strongly predictive across Days 71-100. Use as a resolver feature, never as a sole determinant.",
+    "session_1": { "likely_skill": "csharp", "observed_rate": "24 of 26 applicable days" },
+    "session_2": { "likely_project": "devuniverse" },
+    "session_3": { "likely_domain": "university-coursework" },
+    "session_4": { "likely_domain": "university-coursework" }
+  },
+
+  "known_traps": [
+    {
+      "trap": "inline_correction",
+      "example": "INF3708 A3 — early prep started (mislogged as INF3705 A2 in the original report)",
+      "rule": "When two course codes appear and one sits inside a parenthetical containing a retraction marker (mislogged, incorrect, should have been, actually), the parenthetical code is discarded."
+    },
+    {
+      "trap": "duplicate_day_content",
+      "example": "Days 76 and 77 (2026-07-04 and 2026-07-05) carry identical text.",
+      "rule": "Identical content on distinct dates is legitimate. ContentHash alone must not deduplicate across differing Date values."
+    },
+    {
+      "trap": "unreliable_tags",
+      "example": "Days 82 and 83 tagged 'Hackathons' with no hackathon session present.",
+      "rule": "Tags narrow the candidate set. Tags never decide a resolution on their own."
+    },
+    {
+      "trap": "status_noise_in_session_text",
+      "example": "SUBMITTED 3:34 PM, 1 day 16 hours early",
+      "rule": "Timing and status commentary is stripped by the normaliser before skill resolution is attempted."
+    }
+  ]
+}
