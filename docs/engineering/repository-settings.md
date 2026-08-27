@@ -46,7 +46,8 @@ Required CODEOWNER review must not be enabled during the solo-repository phase. 
 ## Verification record
 
 - Configured: `2026-08-27`
-- Verified by: `ChatGPT (GPT-5.6 Sol)`
+- Verified by: `KevCare`
+- Checked with: `ChatGPT (GPT-5.6 Sol)`
 - Ruleset: `Protect main` — `ACTIVE`
 - Target: default branch (`main`) — `VERIFIED`
 - Require pull request before merging: `VERIFIED`
