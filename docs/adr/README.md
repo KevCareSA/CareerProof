@@ -98,3 +98,15 @@ Status values: Proposed, Accepted, Superseded by ADR-NNNN.
 **Decision.** `project_id: devuniverse`, display name **DevUniverse**. `UniversalDev` and its compound forms are permanent entries in the alias table, not legacy entries scheduled for removal.
 
 **Reason.** The historical log writes `UniversalDev` throughout Days 71-100. That text is immutable under ADR-0001, so the alias must resolve indefinitely regardless of what the canonical display name is or how future entries are written.
+
+---
+
+## ADR-0009 — CA1707 is disabled only for test code
+
+**Status:** Accepted
+
+**Decision.** `CA1707` remains active for production code under `src/`, but is disabled by `tests/.editorconfig` for C# test files only. Test methods may therefore use readable behavioural names such as `Method_Condition_Result` without weakening public-API naming analysis in application code.
+
+**Reason.** `CA1707` is a public-identifier naming rule. Test methods are not part of CareerProof's public API, and underscore-separated test names improve readability as the test suite grows. The first CI run proved that applying the rule uniformly to tests creates noise without protecting product code.
+
+**Consequence.** Any broader suppression of `CA1707`, or suppression of additional analyser rules, requires a separate explicit decision rather than expansion of this test-only exception.
