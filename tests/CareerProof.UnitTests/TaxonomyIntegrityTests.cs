@@ -9,7 +9,7 @@ public sealed class TaxonomyIntegrityTests
     private static readonly string AliasesPath = Path.Combine(AppContext.BaseDirectory, "taxonomy", "aliases-v1.json");
 
     [Fact]
-    public void TaxonomyIdsAreUnique()
+    public void Taxonomy_Ids_AreUnique()
     {
         using var taxonomy = JsonDocument.Parse(File.ReadAllText(TaxonomyPath));
         var ids = GetTaxonomyNodeIds(taxonomy.RootElement).ToList();
@@ -18,7 +18,7 @@ public sealed class TaxonomyIntegrityTests
     }
 
     [Fact]
-    public void TaxonomyIdsDoNotExceedThreeSegments()
+    public void Taxonomy_Ids_DoNotExceedThreeSegments()
     {
         using var taxonomy = JsonDocument.Parse(File.ReadAllText(TaxonomyPath));
         var ids = GetTaxonomyNodeIds(taxonomy.RootElement);
@@ -29,7 +29,7 @@ public sealed class TaxonomyIntegrityTests
     }
 
     [Fact]
-    public void AliasTargetsResolveToDeclaredTaxonomyOrProjectIds()
+    public void AliasTargets_ResolveToDeclaredTaxonomyOrProjectIds()
     {
         using var taxonomy = JsonDocument.Parse(File.ReadAllText(TaxonomyPath));
         using var aliases = JsonDocument.Parse(File.ReadAllText(AliasesPath));
@@ -50,7 +50,7 @@ public sealed class TaxonomyIntegrityTests
     }
 
     [Fact]
-    public void ActivityTypeMarkersResolveToDeclaredActivityTypes()
+    public void ActivityTypeMarkers_ResolveToDeclaredActivityTypes()
     {
         using var taxonomy = JsonDocument.Parse(File.ReadAllText(TaxonomyPath));
         using var aliases = JsonDocument.Parse(File.ReadAllText(AliasesPath));
