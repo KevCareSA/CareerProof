@@ -1,0 +1,153 @@
+{
+  "taxonomy_version": "v1",
+  "created": "2026-08-27",
+  "depth_cap": 3,
+  "provenance": "Derived from Daily Code Log Days 71-100 (2026-06-29 to 2026-08-01, ~99 sessions). Every node below was observed in real log text. Nodes are NOT added speculatively.",
+  "rules": [
+    "IDs are permanent. Display names may change; IDs never do.",
+    "Maximum depth is 3 segments: skill.topic.subtopic. Nothing deeper.",
+    "A node is added only when a real log entry requires it.",
+    "activity_type is NOT a taxonomy node. See activity-types below.",
+    "Domain is a grouping attribute on the skill, not an ID segment."
+  ],
+
+  "skills": [
+    {
+      "id": "csharp",
+      "display_name": "C#",
+      "domain": "software-engineering",
+      "topics": [
+        {
+          "id": "csharp.generics",
+          "display_name": "Generics",
+          "subtopics": [
+            { "id": "csharp.generics.interfaces", "display_name": "Generic Interfaces", "observed_as": ["IEnumerable<T>", "ICollection<T>", "IList<T>", "IRepository<T>"] },
+            { "id": "csharp.generics.constraints", "display_name": "Generic Constraints", "observed_as": ["class", "struct", "new()", "interface constraints"] },
+            { "id": "csharp.generics.collections", "display_name": "Generic Collections" },
+            { "id": "csharp.generics.repositories-services", "display_name": "Generic Repositories and Services" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aspnet-core",
+      "display_name": "ASP.NET Core",
+      "domain": "software-engineering",
+      "topics": [
+        {
+          "id": "aspnet-core.controllers",
+          "display_name": "Controllers",
+          "subtopics": [
+            { "id": "aspnet-core.controllers.construction", "display_name": "Controller Construction" },
+            { "id": "aspnet-core.controllers.action-results", "display_name": "Action Results and HTTP Responses", "observed_as": ["IActionResult", "IActionResults"] },
+            { "id": "aspnet-core.controllers.service-invocation", "display_name": "Calling the Service Layer", "observed_as": ["Controllers to Service", "Controller to Service"] }
+          ]
+        },
+        {
+          "id": "aspnet-core.services",
+          "display_name": "Service Layer",
+          "subtopics": [
+            { "id": "aspnet-core.services.scaffolding", "display_name": "Service Scaffolding" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sql",
+      "display_name": "SQL",
+      "domain": "databases",
+      "topics": [
+        {
+          "id": "sql.queries",
+          "display_name": "Queries",
+          "subtopics": [
+            { "id": "sql.queries.union", "display_name": "UNION" },
+            { "id": "sql.queries.insert", "display_name": "INSERT" },
+            { "id": "sql.queries.aggregates", "display_name": "Aggregates" },
+            { "id": "sql.queries.subqueries", "display_name": "Subqueries" }
+          ]
+        },
+        { "id": "sql.views", "display_name": "Views", "subtopics": [] },
+        { "id": "sql.schemas", "display_name": "Schemas", "subtopics": [] },
+        {
+          "id": "sql.stored-procedures",
+          "display_name": "Stored Procedures",
+          "subtopics": [
+            { "id": "sql.stored-procedures.control-flow", "display_name": "Control Flow", "observed_as": ["IF Logic"] },
+            { "id": "sql.stored-procedures.parameterised", "display_name": "Parameterised Procedures" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dsa",
+      "display_name": "Data Structures and Algorithms",
+      "domain": "computer-science",
+      "topics": [
+        { "id": "dsa.recursion", "display_name": "Recursion", "subtopics": [] },
+        { "id": "dsa.trees", "display_name": "Trees", "subtopics": [
+          { "id": "dsa.trees.binary", "display_name": "Binary Trees" }
+        ] },
+        { "id": "dsa.graphs", "display_name": "Graphs", "subtopics": [
+          { "id": "dsa.graphs.bfs", "display_name": "Breadth-First Search" },
+          { "id": "dsa.graphs.dijkstra", "display_name": "Dijkstra" }
+        ] }
+      ]
+    },
+    {
+      "id": "azure",
+      "display_name": "Azure",
+      "domain": "cloud",
+      "topics": [
+        { "id": "azure.compute", "display_name": "Compute Services", "subtopics": [] },
+        { "id": "azure.networking", "display_name": "Networking Services", "subtopics": [] },
+        { "id": "azure.availability", "display_name": "Availability", "subtopics": [
+          { "id": "azure.availability.availability-sets", "display_name": "Availability Sets", "observed_as": ["Fault Domains", "Update Domains"] }
+        ] }
+      ]
+    },
+    {
+      "id": "project-management",
+      "display_name": "Software Project Management",
+      "domain": "engineering-practice",
+      "topics": [
+        { "id": "project-management.integration", "display_name": "Project Integration", "subtopics": [] },
+        { "id": "project-management.schedule", "display_name": "Schedule Management", "subtopics": [] },
+        { "id": "project-management.cost", "display_name": "Cost Management", "subtopics": [] },
+        { "id": "project-management.strategy", "display_name": "Strategic Analysis", "subtopics": [
+          { "id": "project-management.strategy.swot", "display_name": "SWOT Analysis" }
+        ] }
+      ]
+    }
+  ],
+
+  "activity_types": [
+    { "id": "learning", "display_name": "Learning", "scores_practice": true },
+    { "id": "implementation", "display_name": "Implementation", "scores_practice": true, "scores_application": true },
+    { "id": "review", "display_name": "Review / Reinforcement", "scores_practice": true },
+    { "id": "assignment-work", "display_name": "Assignment Work", "scores_practice": true, "note": "Only when a skill resolves. Admin-only assignment activity resolves skill_id null." },
+    { "id": "submission", "display_name": "Submission", "scores_practice": false, "note": "Administrative. Never carries a skill_id." },
+    { "id": "planning", "display_name": "Planning / Meta", "scores_practice": false, "note": "Quarterly reviews, methodology resets, roadmap work." },
+    { "id": "rest", "display_name": "Rest", "scores_practice": false }
+  ],
+
+  "projects": [
+    {
+      "id": "devuniverse",
+      "display_name": "DevUniverse",
+      "note": "Canonical name is DevUniverse. Historical logs Days 71-100 write it as UniversalDev; that spelling is permanent in the source and resolves via aliases-v1.json."
+    },
+    {
+      "id": "careerproof",
+      "display_name": "CareerProof"
+    }
+  ],
+
+  "courses": [
+    { "id": "inf3703", "display_name": "INF3703", "maps_to_skill": "sql" },
+    { "id": "inf3707", "display_name": "INF3707 Database Design and Implementation", "maps_to_skill": "sql" },
+    { "id": "inf3708", "display_name": "INF3708 Software Project Management", "maps_to_skill": "project-management" },
+    { "id": "inf3720", "display_name": "INF3720", "maps_to_skill": null },
+    { "id": "cos2611", "display_name": "COS2611 Programming: Data Structures", "maps_to_skill": "dsa" }
+  ]
+}
