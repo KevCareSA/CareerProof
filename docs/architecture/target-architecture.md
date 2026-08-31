@@ -463,9 +463,9 @@ Infrastructure is introduced only when a product requirement justifies it.
 
 CareerProof is built through a multi-AI engineering process in which no AI holds final authority over architecture or production.
 
-That process — agent roles, ticket flow, review gates, merge authority, tool permissions and model routing — is defined in the engineering playbook and is **not** restated here. Duplicating it would allow the two copies to drift, and this document is the less likely of the two to be kept current.
+That process — agent roles, ticket flow, review gates, merge authority, tool permissions and model routing — is defined in the CareerProof AI-Native Engineering Guideline, which is maintained outside this repository and is not restated here. Duplicating it would allow the two copies to drift, and this document is the less likely of the two to be kept current.
 
-See: the CareerProof AI-Native Engineering Guideline, and the agent contracts under `docs/agents/`.
+The in-repository agent contracts are maintained under `docs/agents/`.
 
 ---
 

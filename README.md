@@ -4,10 +4,13 @@ CareerProof V1 ingests the real Daily Code Log, classifies its sessions reliably
 
 ## Current build position
 
+This README is the authoritative marker for the current CareerProof build step.
+
 - Step -1 — 100-record feasibility spike: CLOSED
 - Step 0 — taxonomy, scope, target architecture, ADRs: FROZEN
 - Step 1 — implementer/reviewer contracts: FROZEN
-- Step 2 — repository + three CI checks: CURRENT
+- Step 2 — repository + three CI checks: FROZEN
+- Step 3 — Domain Entities: CURRENT
 
 ## Repository structure
 
@@ -33,6 +36,7 @@ CareerProof/
 ├── CareerProof.sln
 ├── Directory.Build.props
 ├── global.json
+├── .gitattributes
 └── .editorconfig
 ```
 
@@ -58,6 +62,6 @@ dotnet format CareerProof.sln --verify-no-changes
 `docs/product/v1-scope.md` governs what may be built in V1. Accepted ADRs remain binding across stages.
 
 
-## Step 2 freeze condition
+## Step 2 status
 
-The repository artifacts are present, but Step 2 is not fully frozen until the remote GitHub repository has the protections in `docs/engineering/repository-settings.md` enabled and the first CI run passes all three checks.
+Step 2 is frozen. Repository protections are configured, PR #1 is merged, and the required Build, Unit Tests, and Format checks have passed.
