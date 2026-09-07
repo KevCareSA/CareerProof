@@ -1,67 +1,147 @@
 # CareerProof
 
-CareerProof V1 ingests the real Daily Code Log, classifies its sessions reliably, and computes a defensible mastery score.
+> Turn real career activity into proof.
 
-## Current build position
+CareerProof is a career evidence system that transforms learning, practice, projects, and work into a structured record of skills, progress, and mastery.
 
-This README is the authoritative marker for the current CareerProof build step.
+It is designed to answer a simple question:
 
-- Step -1 — 100-record feasibility spike: CLOSED
-- Step 0 — taxonomy, scope, target architecture, ADRs: FROZEN
-- Step 1 — implementer/reviewer contracts: FROZEN
-- Step 2 — repository + three CI checks: FROZEN
-- Step 3 — Domain Entities: CURRENT
+**What can you prove you know how to do?**
 
-## Repository structure
+---
 
+## What CareerProof Tracks
+
+CareerProof turns real activity into evidence of:
+
+- Learning
+- Practice
+- Projects
+- Experience
+- Skills
+- Evidence
+- Mastery
+- Career progression
+
+---
+
+## How It Works
+```text
+ACTIVITY
+   ↓
+PRACTICE
+   ↓
+EVIDENCE
+   ↓
+SKILLS
+   ↓
+MASTERY
+   ↓
+CAREER PROOF
+```
+
+For V1:
+```text
+Notion Daily Code Log
+        ↓
+Raw Activity
+        ↓
+Session Extraction
+        ↓
+Classification
+        ↓
+Practice Sessions
+        ↓
+Mastery
+        ↓
+Dashboard
+```
+
+---
+
+## V1 Goal
+
+CareerProof V1 focuses on one thing:
+
+> Ingest a real Daily Code Log, understand the sessions reliably, and calculate a defensible mastery score.
+
+The goal is not to build every future CareerProof feature at once.
+
+The goal is to prove the core system works with real data.
+
+---
+
+## Tech Stack
+
+- ASP.NET Core
+- C#
+- .NET 8
+- xUnit
+- GitHub Actions
+
+---
+
+## Current Build
+```text
+✓ Step -1   100-record spike
+✓ Step  0   Taxonomy, scope, architecture, ADRs
+✓ Step  1   Implementer and reviewer contracts
+✓ Step  2   Repository and CI
+✓ Step  3   Domain entities
+
+→ Step  4   Notion sync
+```
+
+---
+
+## Engineering Approach
+
+CareerProof is built with a human-controlled, AI-assisted workflow:
+```text
+Human Architect
+      ↓
+AI Implementer
+      ↓
+Independent AI Reviewer
+      ↓
+Automated Tests + CI
+      ↓
+Human Merge Authority
+```
+
+AI can plan, implement, and review.
+
+**The human remains the final authority.**
+
+---
+
+## Repository
 ```text
 CareerProof/
-├── .github/
-│   ├── CODEOWNERS
-│   ├── pull_request_template.md
-│   └── workflows/ci.yml
-├── docs/
-│   ├── adr/README.md
-│   ├── agents/
-│   │   ├── implementer.md
-│   │   └── reviewer.md
-│   ├── architecture/target-architecture.md
-│   ├── engineering/repository-settings.md
-│   └── product/v1-scope.md
+├── src/
+│   └── CareerProof.Api/
+├── tests/
+│   └── CareerProof.UnitTests/
 ├── taxonomy/
-│   ├── taxonomy-v1.json
-│   └── aliases-v1.json
-├── src/CareerProof.Api/
-├── tests/CareerProof.UnitTests/
-├── CareerProof.sln
-├── Directory.Build.props
-├── global.json
-├── .gitattributes
-└── .editorconfig
+├── docs/
+├── .github/
+└── CareerProof.sln
 ```
 
-## CI — exactly three checks
+---
 
-1. Build
-2. Unit Tests
-3. Format
+## Quality Gates
 
-No additional CI gate is part of V1 Step 2.
+Every change must pass:
 
-## Local commands
+- Build
+- Unit Tests
+- Format
 
-```bash
-dotnet restore CareerProof.sln
-dotnet build CareerProof.sln --configuration Release
-dotnet test CareerProof.sln --configuration Release
-dotnet format CareerProof.sln --verify-no-changes
-```
+---
 
-## Scope
+## Status
 
-`docs/product/v1-scope.md` governs what may be built in V1. Accepted ADRs remain binding across stages.
+CareerProof is currently in active development.
 
-
-## Step 2 status
-
-Step 2 is frozen. Repository protections are configured, PR #1 is merged, and the required Build, Unit Tests, and Format checks have passed.
+**Current step: Step 4 — Notion sync**
