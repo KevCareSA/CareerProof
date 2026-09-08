@@ -1,0 +1,41 @@
+name: Claude Review
+
+on:
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  review:
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    environment: claude-review
+    steps:
+      - name: Checkout trusted governance
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Invoke independent reviewer
+        uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636 # v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: /careerproof-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+          claude_args: >-
+            --tools "Read,Glob,Grep,Bash"
+            --permission-mode dontAsk
+            --max-turns 10
+            --allowedTools "Read,Glob,Grep,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(git rev-parse:*)"
+            --disallowedTools "Edit,Write,NotebookEdit,Agent,Task,mcp__*,Bash(gh pr review:*),Bash(gh api:*)"
+            --strict-mcp-config
