@@ -27,6 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: Invoke independent reviewer
+        id: claude_review
         uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -39,3 +40,69 @@ jobs:
             --allowedTools "Read,Glob,Grep,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(git rev-parse:*)"
             --disallowedTools "Edit,Write,NotebookEdit,Agent,Task,mcp__*,Bash(gh pr review:*),Bash(gh api:*)"
             --strict-mcp-config
+
+      - name: Summarize denied reviewer operations
+        if: failure() && steps.claude_review.outcome == 'failure'
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 -I - <<'PY'
+          import json
+          import shlex
+
+          def summarize(messages):
+              tools = {"Read", "Glob", "Grep", "Edit", "Write", "NotebookEdit",
+                       "Agent", "Task", "Skill", "TodoWrite", "WebFetch", "WebSearch"}
+              categories = {
+                  ("gh", "pr", name): "Bash: gh pr " + name
+                  for name in ("view", "diff", "comment", "checks", "status")
+              }
+              categories[("gh", "run", "view")] = "Bash: gh run view"
+              categories[("gh", "api")] = "Bash: gh api"
+              categories[("git", "rev-parse")] = "Bash: git rev-parse"
+              labels = []
+              if not isinstance(messages, list):
+                  return labels
+              for message in messages:
+                  if not isinstance(message, dict) or message.get("type") != "result":
+                      continue
+                  denials = message.get("permission_denials")
+                  if not isinstance(denials, list):
+                      continue
+                  for denial in denials:
+                      if not isinstance(denial, dict):
+                          continue
+                      tool = denial.get("tool_name")
+                      tool_input = denial.get("tool_input")
+                      tool_id = denial.get("tool_use_id")
+                      if (not isinstance(tool, str) or not isinstance(tool_input, dict)
+                              or not isinstance(tool_id, str) or not tool_id):
+                          continue
+                      if tool == "Bash":
+                          command = tool_input.get("command")
+                          if not isinstance(command, str):
+                              continue
+                          try:
+                              words = tuple(shlex.split(command))
+                          except ValueError:
+                              words = ()
+                          label = categories.get(words[:3]) or categories.get(words[:2])
+                          label = label or ("Bash: gh other" if words[:1] == ("gh",)
+                                            else "Bash: other")
+                      elif tool in tools:
+                          label = tool
+                      else:
+                          continue
+                      labels.append(label)
+              return labels
+
+          try:
+              with open("/home/runner/work/_temp/claude-execution-output.json",
+                        encoding="utf-8") as stream:
+                  labels = summarize(json.load(stream))
+              output = ("Permission denials:\n" + "\n".join("- " + label for label in labels)
+                        if labels else "Permission denial details unavailable.")
+          except Exception:
+              output = "Permission denial details unavailable."
+          print(output)
+          PY
