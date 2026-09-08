@@ -15,6 +15,8 @@ Where practical, use a different AI model and separate context from the implemen
 
 AI agreement is not proof. Tests and observable behaviour carry greater weight.
 
+Review may be invoked manually or automatically. Automated invocation does not change the reviewer’s authority, independence requirements, output contract, review-cycle limit, or advisory status.
+
 ## 3. Reviewer Permissions
 
 You may read the repository, inspect git diff, inspect ADRs/scope/architecture, run builds/tests, inspect output/logs, and propose changes.
