@@ -37,6 +37,24 @@ Until then:
 
 This is a deliberate configuration, not a missing protection. A future reviewer must not increase the required approval count or enable required CODEOWNER review until a second reviewer identity exists.
 
+## Claude review environment
+
+The `claude-review` GitHub environment controls credential access for the advisory Claude review workflow. It is not an application deployment environment.
+
+Configured protection settings:
+
+- Required reviewers: `ON`.
+- Required reviewer: `KevCareSA`.
+- Prevent self-review: `OFF`.
+- Allow administrators to bypass configured protection rules: `OFF`.
+- Credential scope: the Claude review credential is stored as an environment-scoped secret rather than a repository-wide secret.
+
+`KevCareSA` is currently the only authorised approver during the solo-repository phase. Prevent self-review is deliberately disabled because enabling it would make approval impossible and leave review workflow runs blocked.
+
+Environment approval gates access to the credential. It does not create a required pull-request review or add a required merge check. The required merge checks remain exactly `Build`, `Unit Tests`, and `Format`.
+
+The approval gate is provisional. After several successful and audited automated review runs, the human project owner may reassess whether required environment approval should remain enabled. Any change must be deliberate and documented.
+
 ## CODEOWNERS
 
 `.github/CODEOWNERS` assigns repository ownership to `@KevCareSA`.
@@ -44,6 +62,8 @@ This is a deliberate configuration, not a missing protection. A future reviewer 
 Required CODEOWNER review must not be enabled during the solo-repository phase. Enable it only when a second reviewer identity exists and can provide an independent approval.
 
 ## Verification record
+
+### 2026-08-27 — Step 2 repository protections
 
 - Configured: `2026-08-27`
 - Verified by: `KevCare`
@@ -60,4 +80,16 @@ Required CODEOWNER review must not be enabled during the solo-repository phase. 
 - CODEOWNERS file: `* @KevCareSA` — `VERIFIED`
 - CODEOWNERS review enforcement: `DEFERRED — second reviewer identity required`
 
-Step 2 may be frozen after PR #1 is merged into `main`.
+Step 2 was frozen after PR #1 was merged into `main`.
+
+### 2026-09-08 — Claude review environment
+
+- Configured: `2026-09-08`
+- Verified by: `KevCare`
+- Checked with: `ChatGPT (GPT-5.6 Sol)`
+- Claude review environment: `claude-review` — `VERIFIED`
+- Claude review required reviewers: `ON` — `VERIFIED`
+- Claude review required reviewer: `KevCareSA` — `VERIFIED`
+- Claude review prevent self-review: `OFF — deliberate solo-repository configuration`
+- Claude review administrator bypass: `OFF` — `VERIFIED`
+- Claude review credential scope: environment secret — `VERIFIED`
