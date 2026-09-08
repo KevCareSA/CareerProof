@@ -26,3 +26,7 @@ evaluation-data/private/
 # Build/test output
 TestResults/
 artifacts/
+
+# Unrelated local Dineo files
+dineo-love-experience-v2-deploy.zip
+dineo-love-experience/
