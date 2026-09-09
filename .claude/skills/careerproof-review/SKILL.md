@@ -32,6 +32,6 @@ PR head SHA: Y
 Claude configuration source: trusted PR base branch
 The governance SHA is not a skill/configuration SHA: the action may restore Claude configuration from a later trusted base commit; do not claim exact snapshot consistency.
 If diff/evidence is incomplete, truncated, unavailable, or insufficient, explicitly report the affected coverage and missing evidence; never describe partial inspection as complete or automatically broaden tools.
-Produce the report required by `docs/agents/reviewer.md`; distinguish observed CI evidence from builds/tests not executed in this review.
+Produce the report required by `docs/agents/reviewer.md`; for build result and test result, state that builds/tests were not executed in this review, and do not inspect GitHub CI or check-run status.
 Publish the completed report and audit context as EXACTLY ONE general PR conversation comment using `gh pr comment` with a safely quoted literal `--body`; do not post interim or separate findings comments.
 If publication fails or its outcome is uncertain, report that limitation in the final workflow output without blindly retrying and risking a duplicate comment.
